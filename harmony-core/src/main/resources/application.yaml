@@ -1,0 +1,26 @@
+server:
+  port: 7000
+
+spring:
+  application:
+    name: harmony-core
+  datasource:
+    url: ${POSTGRES_CONNECTION_URL:jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/postgres}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: INFO
+        type:
+          descriptor:
+            sql: INFO
