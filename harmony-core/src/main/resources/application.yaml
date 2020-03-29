@@ -5,22 +5,36 @@ spring:
   application:
     name: harmony-core
   datasource:
-    url: ${POSTGRES_CONNECTION_URL:jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/postgres}
+    url: ${POSTGRES_CONNECTION_URL:jdbc:postgresql://}${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/postgres
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:postgres}
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
-        ddl-auto: create-drop
+        ddl-auto: ${DATABASE_DDL:update}
     generate-ddl: true
-    show-sql: true
+    show-sql: false
 
 logging:
   level:
-    org:
-      hibernate:
-        SQL: INFO
-        type:
-          descriptor:
-            sql: INFO
+    com: ${LOG_LEVEL:DEBUG}
+    org: ${LOG_LEVEL:DEBUG}
+
+
+keycloak:
+  realm: ${KEYCLOAK_REALM:harmony}
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER:http://localhost:8080/auth/}
+  ssl-required: ${KEYCLOAK_SSL_REQUIRED:external}
+  resource: ${KEYCLOAK_RESOURCE:harmony-core}
+  enabled: ${KEYCLOAK_ENABLE:true}
+  credentials:
+    secret: ${KEYCLOAK_CLIENT_SECRET:f23b72d7-0c51-41df-b635-7bbef0c75b1f}
+  security-constraints:
+    - authRoles:
+        - ${SECURE_ROLE_1:USER}
+      securityCollections:
+        - name: api
+          patterns:
+            - ${SECURE_URL_1:/api/v1/*}
+  policy-enforcer-config:
