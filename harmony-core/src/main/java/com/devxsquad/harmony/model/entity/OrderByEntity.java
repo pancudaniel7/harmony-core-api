@@ -1,21 +1,27 @@
 package com.devxsquad.harmony.model.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "order_entity")
+@Table(name = "order_by")
 public class OrderByEntity {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
 
-    @Column(unique = true)
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
+    private String address;
 
     @Column
     private String name;

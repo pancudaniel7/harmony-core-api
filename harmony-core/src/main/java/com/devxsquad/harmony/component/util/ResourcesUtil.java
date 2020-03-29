@@ -1,4 +1,4 @@
-package com.devxsquad.harmony.util;
+package com.devxsquad.harmony.component.util;
 
 import java.io.File;
 import java.net.URL;
