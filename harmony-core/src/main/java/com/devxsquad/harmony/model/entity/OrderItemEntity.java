@@ -1,28 +1,28 @@
 package com.devxsquad.harmony.model.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "order_item")
 public class OrderItemEntity {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
 
-    @NotNull
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
-    private String description;
+    @Column(nullable = false)
+    private String price;
 
-    @Column
+    @Column(nullable = false)
     private String amount;
 
-    @NotNull
     @Column
-    private String price;
+    private String details;
 }
