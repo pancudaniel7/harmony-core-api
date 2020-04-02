@@ -1,5 +1,5 @@
 server:
-  port: 7000
+  port: ${SERVER_PORT:7000}
 
 spring:
   application:
@@ -18,9 +18,8 @@ spring:
 
 logging:
   level:
-    com: ${LOG_LEVEL:DEBUG}
-    org: ${LOG_LEVEL:DEBUG}
-
+    com: ${LOG_LEVEL:TRACE}
+    org: ${LOG_LEVEL:TRACE}
 
 keycloak:
   realm: ${KEYCLOAK_REALM:harmony}
@@ -29,7 +28,7 @@ keycloak:
   resource: ${KEYCLOAK_RESOURCE:harmony-core}
   enabled: ${KEYCLOAK_ENABLE:true}
   credentials:
-    secret: ${KEYCLOAK_CLIENT_SECRET:f23b72d7-0c51-41df-b635-7bbef0c75b1f}
+    secret: ${KEYCLOAK_CLIENT_SECRET:23e16522-e563-494f-bcf8-5dfcf003d616}
   security-constraints:
     - authRoles:
         - ${SECURE_ROLE_1:USER}
@@ -37,4 +36,4 @@ keycloak:
         - name: api
           patterns:
             - ${SECURE_URL_1:/api/v1/*}
-  policy-enforcer-config:
+
