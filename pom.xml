@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.harmony</groupId>
     <artifactId>harmony-services</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>harmony-core-ap</name>
     <packaging>pom</packaging>
 
@@ -25,6 +25,7 @@
         <docker-image-jar.command>
             java -jar /app/${project.build.finalName}.jar
         </docker-image-jar.command>
+        <keycloak-server.version>9.0.2</keycloak-server.version>
     </properties>
 
     <dependencies>
@@ -35,6 +36,18 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.keycloak.bom</groupId>
+                <artifactId>keycloak-adapter-bom</artifactId>
+                <version>${keycloak-server.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

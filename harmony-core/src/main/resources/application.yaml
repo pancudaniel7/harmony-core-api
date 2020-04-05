@@ -1,9 +1,10 @@
 server:
-  port: 7000
+  forward-headers-strategy: framework
+  port: ${SERVER_PORT:7000}
 
 spring:
   application:
-    name: harmony-core
+    name: ${KEYCLOAK_RESOURCE:harmony-core}
   datasource:
     url: ${POSTGRES_CONNECTION_URL:jdbc:postgresql://}${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/postgres
     username: ${POSTGRES_USER:postgres}
@@ -14,14 +15,28 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL95Dialect
         ddl-auto: ${DATABASE_DDL:update}
     generate-ddl: true
-    show-sql: true
+    show-sql: false
 
 logging:
   level:
-    org:
-      hibernate:
-        SQL: INFO
-        type:
-          descriptor:
-            sql: INFO
     com: ${LOG_LEVEL:DEBUG}
+    org: ${LOG_LEVEL:DEBUG}
+
+keycloak:
+  enabled: ${KEYCLOAK_ENABLE:true}
+  realm: ${KEYCLOAK_REALM:harmony}
+  auth-server-url: ${KEYCLOAK_AUTH_SERVER:http://localhost:8080/auth/}
+  resource: ${KEYCLOAK_RESOURCE:harmony-core}
+  ssl-required: ${KEYCLOAK_SSL_REQUIRED:external}
+  disable-trust-manager: ${KEYCLOAK_DISABLE_TRUST_MANAGER:true}
+  credentials:
+    secret: ${KEYCLOAK_CLIENT_SECRET:26b211c8-b9ac-4009-acd5-ed1dc9f5dd39}
+  security-constraints:
+    - authRoles:
+        - ${SECURE_ROLE_1:USER}
+      securityCollections:
+        - name: api
+          patterns:
+            - ${SECURE_URL_1:/api/v1/*}
+
+

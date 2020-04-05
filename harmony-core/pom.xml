@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.harmony</groupId>
         <artifactId>harmony-services</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
     <groupId>com.devxsquad.harmony.core</groupId>
     <artifactId>harmony-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>harmony-core</name>
 
     <properties>
@@ -34,6 +34,42 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgres.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${map-struct.version}</version>
         </dependency>
 
         <!--swagger-->
@@ -75,14 +111,12 @@
             <artifactId>hibernate-java8</artifactId>
         </dependency>
 
-        <!--apache commons-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache-commons.version}</version>
         </dependency>
 
-        <!--tests-->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -109,7 +143,7 @@
                             <alias>${project.artifactId}</alias>
                             <name>pancudaniel7/%a:%v</name>
                             <build>
-                                <from>openjdk:15-jdk</from>
+                                <from>adoptopenjdk:11.0.6_10-jdk-hotspot-bionic</from>
                                 <tags>
                                     <tag>latest</tag>
                                     <tag>${project.version}</tag>

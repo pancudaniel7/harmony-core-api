@@ -7,14 +7,12 @@ import com.devxsquad.harmony.service.OrderingService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.ResponseEntity.ok;
 
-@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
